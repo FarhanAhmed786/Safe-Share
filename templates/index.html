@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Share</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to Safe Share</h1>
+            <p>Your secure file sharing solution.</p>
+        </header>
+        <main>
+						<section id="product-info">
+    <div class="intro-text">
+        <h2>Simple, Secure, Temporary.</h2>
+        <p>Share sensitive files with a one-time link that self-destructs after use.</p>
+    </div>
+
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="icon-box">
+                <img src="/static/upload.svg" alt="Upload">
+            </div>
+            <h3>1. Upload</h3>
+            <p>Select your file. We encrypt it instantly.</p>
+						<div class="limits-container">
+							<span class="badge file-size" title="Maximum size per single file">Max File: <span> 10 MB </span></span>
+							<span class="badge warning" title="Total shared server capacity">Server Capacity: <span> 50 MB </span></span>
+						</div>
+        </div>
+
+        <div class="step-card">
+            <div class="icon-box">
+								<img src="/static/share.svg" alt="Share">
+            </div>
+            <h3>2. Share</h3>
+            <p>Copy your unique secure link and send it to the recipient.</p>
+        </div>
+
+        <div class="step-card">
+            <div class="icon-box">
+								<img src="/static/vanish.svg" alt="Vanish">
+            </div>
+            <h3>3. Vanish</h3>
+            <p>The link works <strong>once</strong>. After download, the file is deleted forever.</p>
+        </div>
+    </div>
+</section>
+            <section id="upload">
+                <h2>Upload a File</h2>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <label for="real-file" class="file-select-box" id="file-label-text">
+                        Choose a File...
+                    </label>
+										<input type="file" id="real-file" name="userUploadedFile" required onchange="showFileName()">
+										<button type="submit" class="button" style="margin-top: 10px;">Upload</button>
+                    <div>
+                        {{if .Link}}
+                            <p>Your file has been encrypted! Access it here: <a href="{{.Link}}">{{.Link}}</a></p>
+                        {{end}}
+                        {{if .Error}}
+                            <p class="error-message">Error: {{.Error}}</p>
+                        {{end}}
+                    </div>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 Safe Share. All rights reserved.</p>
+        </footer>
+    </div>
+	<script>
+    function showFileName() {
+         var fileInput = document.getElementById('real-file');
+         var labelText = document.getElementById('file-label-text');
+         
+         if (fileInput.files.length > 0) {
+             labelText.textContent = "Selected: " + fileInput.files[0].name;
+             labelText.style.color = "#0056b3";
+             labelText.style.borderColor = "#0056b3";
+         } else {
+             labelText.textContent = "Choose a File...";
+         }
+     }
+	 </script>
+</body>
+</html>
