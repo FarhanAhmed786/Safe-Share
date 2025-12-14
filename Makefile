@@ -11,7 +11,7 @@ all: run
 # ==============================================================================
 run: server.crt server.key
 	@echo "Starting Safe Share Server..."
-	go run .
+	go run ./src
 
 # ==============================================================================
 # TARGET: server.crt / server.key
